@@ -1,0 +1,111 @@
+/************************************************\
+DEFINIÃ‡Ã•ES GLOBAIS
+\************************************************/
+*{
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+}
+
+/************************************************\
+DEFINIÃ‡Ã•ES DE LAYOUT
+\************************************************/
+.cabecalho{
+	height: 60px;
+	background-color: #008B8B;
+}
+
+.container{
+	width: 1200px;
+	margin: 0px auto;
+	padding-top: 15px;
+}
+
+.rodape{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: #008B8B;
+	height: 60px;
+}
+
+/************************************************\
+DEFINIÃ‡Ã•ES DE TÃ�TULO
+\************************************************/
+.titulo{
+	color: #fff;
+	text-align: center;
+}
+
+.titulo-cabecalho{
+	font-size: 30px;
+}
+
+.titulo-rodape{
+	font-size: 20px;
+}
+
+.titulo-principal{
+	font-size:25px;
+	font-weight: bold;
+	color: #008B8B;
+	border-bottom: 2px solid #008B8B;
+	margin: 20px 0 30px;
+}
+
+/************************************************\
+DEFINIÃ‡Ã•ES DA TABELA
+\************************************************/
+
+.tabela{
+	width: 100%;
+	border-spacing: 5px;
+	margin-top: 30px;
+	
+}
+
+.titulo-tabela{
+	font-weight: bold;
+}
+
+.tabela--cabecalho{
+	background-color: #008B8B;
+	color:#fff;
+}
+
+.campo{
+	height: 30px;
+	color: #900;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding-left: 5px;
+	width: 100%;
+}
+
+
+/************************************************\
+DEFINIÃ‡Ã•ES DO BOTÃƒO
+\************************************************/
+
+.botao{
+	text-decoration: none;
+	background-color: #008B8B;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 45px 10px;
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+.botao:hover, .botao:focus{
+	background-color: #006868;
+}
+
+/************************************************\
+DEFINIÃ‡Ã•ES DO BOTÃƒO
+\************************************************/
+.fundo{
+	background-color: #550000;
+}
