@@ -20,14 +20,17 @@
 		<h1 class="mb-5">Departamentos</h1>
 		
 		<div class="row">
-			<div class="col">
+			<div class="col-sm-12 mb-4">
+				<a href="/uninove/departamento/cadastro.do?fn=e" class="btn btn-success">Cadastrar</a>
+			</div>
+			<div class="col-sm-12">
 				<table class="table">
 					<thead class="thead-light">
 						<tr>
 							<th>CODIGO</th>
 							<th>SIGLA</th>
 							<th>NOME</th>
-							<th class="text-center">FUNCIONARIOS</th>
+							<th colspan="3"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -36,7 +39,9 @@
 							<td><%=departamento.getCodigo() %></td>
 							<td><%=departamento.getSigla() %></td>
 							<td><%=departamento.getNome() %></td>
-							<td class="text-center"><a href="<%= String.format("funcionario?sigla=%s", departamento.getSigla()) %>">Ver</a></td>
+							<td><a href="/uninove/departamento/cadastro.do?fn=e&sigla=<%=departamento.getSigla()%>">Editar</a></td>
+							<td><a href="/uninove/departamento/cadastro.do?fn=d&sigla=<%=departamento.getSigla()%>">Excluir</a></td>
+							<td class="text-center"><a href="<%= String.format("funcionario?sigla=%s", departamento.getSigla()) %>">Funcionarios</a></td>
 						</tr>
 					<% } %>
 					</tbody>

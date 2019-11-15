@@ -25,7 +25,7 @@
 	%>
 
 	<div class="container mt-4">
-		<h1 class="mb-5">Cadastrar Funcionario</h1>
+		<h1 class="mb-5">Cadastro Funcionario</h1>
 
 		<form action="/uninove/funcionario/cadastrar" method="post">
 			<input type="hidden" name="codigo" value="0">

@@ -18,9 +18,8 @@ public class FuncionarioDao {
 		try {
 
 			StringBuilder sb = new StringBuilder();
-			sb.append(
-					"select f.codigo, f.nome, f.cpf, f.dt_nascimento, f.codigo_departamento, d.nome as nome_departamento, d.sigla ");
-			sb.append("from funcionario f ");
+			sb.append("select f.codigo, f.nome, f.cpf, f.dt_nascimento, f.codigo_departamento, d.nome as nome_departamento, d.sigla ");
+			sb.append("from funcionario f "); 
 			sb.append("join departamento d on f.codigo_departamento = d.codigo ");
 			sb.append("where d.sigla = ? ");
 			sb.append("order by f.nome");
@@ -53,6 +52,7 @@ public class FuncionarioDao {
 			sb.append(
 					"select f.codigo, f.nome, f.cpf, f.dt_nascimento, f.codigo_departamento, d.nome as nome_departamento, d.sigla ");
 			sb.append("from funcionario f ");
+			sb.append("left ");
 			sb.append("join departamento d on f.codigo_departamento = d.codigo ");
 			sb.append("order by f.nome");
 
