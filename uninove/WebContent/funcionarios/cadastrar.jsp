@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="br.uninove.dominio.Funcionario"%>
-
-<%@ page import="br.uninove.dominio.Funcionario"%>
+<%@ page import="br.uninove.dominio.*"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +12,20 @@
 <body>
 	<%@ include file="../shared/menu.jsp"%>
 
+	<%
+		List<Departamento> departamentos = new ArrayList<Departamento>();
+		String sigla = "";
+		if (request.getAttribute("sigla") != null) {
+			sigla = request.getAttribute("sigla").toString();
+		}
+
+		if (request.getAttribute("departamentos") != null) {
+			departamentos = (ArrayList<Departamento>) request.getAttribute("departamentos");
+		}
+	%>
 
 	<div class="container mt-4">
-		<h1 class="mb-5">Editar Funcionario</h1>
+		<h1 class="mb-5">Cadastrar Funcionario</h1>
 
 		<form action="/uninove/funcionario/cadastrar" method="post">
 			<input type="hidden" name="codigo" value="0">
@@ -41,13 +51,18 @@
 				<label for="departamento_codigo">Departamento</label> <select
 					class="form-control" name="departamento_codigo"
 					id="departamento_codigo">
-					<option value="1">Marketing</option>
-					<option value="2">Expedição</option>
-					<option value="3">Recursos Humanos</option>
+					<%for (Departamento departamento : departamentos) {%>
+							
+							<%if (departamento.getSigla().equals(sigla)) {%>
+									<option value="<%=departamento.getCodigo()%>" selected="selected"><%=departamento.getNome()%></option>
+							<%} else {%>
+									<option value="<%=departamento.getCodigo()%>"><%=departamento.getNome()%></option>	
+							<%}%>
+					<%}%>
 				</select>
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-danger">Alterar</button>
+				<button type="submit" class="btn btn-success">Gravar</button>
 				<a class="btn btn-secondary" href="/uninove/funcionario">Cancelar</a>
 			</div>
 		</form>

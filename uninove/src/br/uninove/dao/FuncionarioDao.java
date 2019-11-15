@@ -79,7 +79,7 @@ public class FuncionarioDao {
 		try {
 
 			String sql = "";
-			sql += "select codigo, nome, cpf, dt_nascimento ";
+			sql += "select codigo, nome, cpf, dt_nascimento, codigo_departamento ";
 			sql += "from funcionario ";
 			sql += "where codigo = ?";
 
@@ -132,8 +132,6 @@ public class FuncionarioDao {
 				sql += "values(?,?,?,?)";
 
 			}
-			
-			
 
 			Connection conn = Conexao.GetConnection();
 			PreparedStatement command = conn.prepareStatement(sql);
@@ -141,11 +139,11 @@ public class FuncionarioDao {
 			command.setString(2, cpf);
 			command.setDate(3, new java.sql.Date(dtNascimento.getTime()));
 			command.setInt(4, codigoDepartamento);
-			
+
 			if (codigo > 0) {
 				command.setInt(5, codigo);
 			}
-			
+
 			return command.execute();
 
 		} catch (SQLException e) {
@@ -159,14 +157,22 @@ public class FuncionarioDao {
 
 	private Funcionario MontarFuncionario(ResultSet result, Boolean completo) throws SQLException {
 		Departamento departamento = null;
+		Funcionario funcionario = null;
 
 		if (completo) {
 			departamento = new Departamento(result.getInt("codigo_departamento"), result.getString("nome_departamento"),
 					result.getString("sigla"));
-		}
+			
+			funcionario = new Funcionario(result.getInt("codigo"), result.getString("nome"), result.getString("cpf"),
+					result.getDate("dt_nascimento"), departamento);
+		} else {
 
-		Funcionario funcionario = new Funcionario(result.getInt("codigo"), result.getString("nome"),
-				result.getString("cpf"), result.getDate("dt_nascimento"), departamento);
+			departamento = new Departamento(result.getInt("codigo_departamento")); 
+			funcionario = new Funcionario(result.getInt("codigo"), result.getString("nome"), result.getString("cpf"),
+					result.getDate("dt_nascimento"), result.getInt("codigo_departamento"));
+			funcionario.setDepartamento(departamento);
+			
+		}
 
 		return funcionario;
 	}

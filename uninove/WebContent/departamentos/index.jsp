@@ -17,7 +17,7 @@
 	%>
 	
 	<div class="container mt-4">
-		<h1 class="mb-5">Cadastro de Departamentos</h1>
+		<h1 class="mb-5">Departamentos</h1>
 		
 		<div class="row">
 			<div class="col">

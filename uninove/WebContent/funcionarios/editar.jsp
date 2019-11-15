@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="br.uninove.dominio.Funcionario"%>
+<%@ page import="br.uninove.dominio.Departamento"%>
+<%@ page import="java.util.*"%>
 
-<%@ page import="br.uninove.dominio.Funcionario"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,12 @@
 		if(request.getAttribute("funcionario") != null){
 			funcionario = (Funcionario) request.getAttribute("funcionario");
 		}
+		
+		List<Departamento> departamentos = new ArrayList<Departamento>();
+		if(request.getAttribute("departamentos") != null){
+			departamentos = (List<Departamento>)request.getAttribute("departamentos");
+		}
+		
 	%>
 
 
@@ -25,8 +32,9 @@
 		<h1 class="mb-5">Editar Funcionario</h1>
 
 		<form action="/uninove/funcionario/editar" method="post">
-			<input type="hidden" name="codigo" value="<%=funcionario.getCodigo()%>">
-		
+			<input type="hidden" name="codigo"
+				value="<%=funcionario.getCodigo()%>">
+
 			<div class="form-group">
 				<label for="exampleFormControlInput1">Nome</label> <input
 					type="text" class="form-control" name="nome"
@@ -47,10 +55,15 @@
 
 			<div class="form-group">
 				<label for="departamento_codigo">Departamento</label> <select
-					class="form-control" name="departamento_codigo" id="departamento_codigo">
-					<option value="1">Marketing</option>
-					<option value="2">Expedição</option>
-					<option value="3">Recursos Humanos</option>
+					class="form-control" name="departamento_codigo"
+					id="departamento_codigo">
+					<%for(Departamento departamento : departamentos){ %>
+						<%if(departamento.getCodigo() == funcionario.getDepartamento().getCodigo()) {%>
+							<option value="<%= departamento.getCodigo()%>" selected="selected"><%=departamento.getNome()%></option>
+						<%}else{ %>
+							<option value="<%= departamento.getCodigo()%>"><%=departamento.getNome()%></option>
+						<%} %>
+					<%} %>
 				</select>
 			</div>
 			<div class="form-group">

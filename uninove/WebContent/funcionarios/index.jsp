@@ -15,11 +15,11 @@
 	<%@ include file="../shared/menu.jsp"%>
 
 	<%
-		List<Funcionario> funcionarios = new ArrayList<Funcionario>(); 
-				if(request.getAttribute("funcionarios") != null){	
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		if (request.getAttribute("funcionarios") != null) {
 			funcionarios = (List<Funcionario>) request.getAttribute("funcionarios");
 		}
-		
+
 		String sigla = "";
 		if (request.getAttribute("sigla") != null) {
 			sigla = request.getAttribute("sigla").toString();
@@ -27,11 +27,25 @@
 	%>
 
 	<div class="container mt-4">
-		<h1 class="mb-5">Cadastro de Funcionarios</h1>
-
+		<%if(sigla.isEmpty()){ %>
+			<h1 class="mb-5">Funcionarios</h1>
+		<%}else {%>
+			<h1 class="mb-5">Funcionarios <small><%=sigla%></small></h1>
+		<%} %>
 		<div class="row">
 			<div class="col-md-12 mb-4 text-rigth">
-				<a href="/uninove/funcionario/cadastrar" class="btn btn-secondary">Cadastrar</a>
+				<%
+					if (sigla.isEmpty()) {
+				%>
+				<a href="/uninove/funcionario/cadastrar" class="btn btn-success">Cadastrar</a>
+				<%
+					} else {
+				%>
+				<a href="/uninove/departamento" class="btn btn-secondary">Voltar</a>
+				<a href="/uninove/funcionario/cadastrar?sigla=<%=sigla%>" class="btn btn-success">Cadastrar</a>
+				<%
+					}
+				%>
 			</div>
 			<div class="col-md-12">
 				<table class="table">
@@ -45,6 +59,15 @@
 						</tr>
 					</thead>
 					<tbody>
+						<%
+							if (funcionarios.isEmpty()) {
+						%>
+						<tr>
+							<td colspan="5">Não há dados a serem exibidos</td>
+						</tr>
+						<%
+							} else {
+						%>
 						<%
 							for (Funcionario funcionario : funcionarios) {
 						%>
@@ -60,6 +83,9 @@
 								href="<%=String.format("funcionario/excluir?codigo=%s&sigla=%s", funcionario.getCodigo(), sigla)%>"
 								title="Excluir">Excluir</a></td>
 						</tr>
+						<%
+							}
+						%>
 						<%
 							}
 						%>

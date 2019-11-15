@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.uninove.dao.FuncionarioDao;
-import br.uninove.dominio.Funcionario;
+import br.uninove.dao.*;
+import br.uninove.dominio.*;
 
 @WebServlet("/funcionario/editar")
 public class FuncionarioEditarServlet extends HttpServlet {
@@ -24,10 +25,13 @@ public class FuncionarioEditarServlet extends HttpServlet {
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
 
 		FuncionarioDao dao = new FuncionarioDao();
+		DepartamentoDao daoDepartamento = new DepartamentoDao();
 		Funcionario funcionario = dao.Get(codigo);
+		List<Departamento> departamentos = daoDepartamento.Listar();
+		
 
 		request.setAttribute("funcionario", funcionario);
-		request.setAttribute("funcao", "Editar Funcionario");
+		request.setAttribute("departamentos", departamentos);
 
 		request.getRequestDispatcher("/funcionarios/editar.jsp").forward(request, response);
 
